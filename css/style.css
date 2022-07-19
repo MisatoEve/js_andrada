@@ -1,0 +1,18 @@
+/* ▼ Normalize */
+* {
+    margin: 0;
+    padding: 0;
+}
+/* ▼ Estilos generales */
+
+html {
+    font-size: 62.5%; 
+}
+  
+/* ▼ Estilos Index */
+
+.titulo {
+    color: forestgreen;
+    font-size: 5em;
+    margin: 10rem;
+}
