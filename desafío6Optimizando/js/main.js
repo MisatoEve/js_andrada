@@ -32,7 +32,6 @@ const juego6B = new Juegos(12, "Grand Theft Auto V Standard Edition Rockstar Gam
 
 //▼Creamos los nuevos Array
 let conjuntoJuegos = []
-let productosEnCarrito = []
 
 //▼Elementos DOM 
 let botonCarrito = document.getElementById("botonCarrito")
@@ -71,15 +70,8 @@ if(localStorage.getItem("conjuntoJuegos")){
     conjuntoJuegos.push(juego1, juego1A, juego2, juego2A, juego3, juego3A, juego4, juego5, juego5A, juego6, juego6A, juego6B)
     localStorage.setItem("conjuntoJuegos", JSON.stringify(conjuntoJuegos))
 }
-console.log(conjuntoJuegos)
-//▼Inicio del array carrito
-if(localStorage.getItem("carrito")){
-    productosEnCarrito = JSON.parse(localStorage.getItem("carrito"))
-}else{
-    console.log(`primera vez`)
-    localStorage.setItem("carrito", [])
-}
-//▼Desestructur Array 
+
+//▼Desestructurar Array 
 let [a, ,b , c] = conjuntoJuegos
 a = "id: 1, titulo: Call of Duty: Vanguard Edition Activision, 2021, 18499, fisico"
 console.log(a) //►imprime en consola el valor asignado en la líne anterior y reemplaza el original
@@ -91,6 +83,9 @@ console.log(...conjuntoJuegos) //►imprime en consola array ok
 //▼Buscar por título ||▼Se aplica Operador Nullish
 let tituloBuscado = conjuntoJuegos.find(juego => juego.titulo == "Fall Guys") ?? "No tenemos ese libro en stock"
 console.log(tituloBuscado) //►imprime según titulo buscado en consola {id: 7, titulo: 'Fall Guys', anio: 2020, precio: 1299, formato: 'digital', …}
+
+//▼Se aplica Operador OR
+let productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || []
 
 //▼Desestructurar un objeto "juego1" ▼Se aplica Alias a "juego1A" ||▼Se aplica Operador AND - OR
 const {titulo, precio} = juego1
@@ -120,11 +115,10 @@ function mostrarCatalogo(){
                                     </article>` 
         divProductos.appendChild(nuevoProducto)
 
-        let btnAgregar = document.getElementById(`agregarBtn ${juego.id}`)
+        let btnAgregar = document.getElementById(`agregarBtn${juego.id}`)
         console.log(btnAgregar);
         btnAgregar.addEventListener("click", () =>{agregarAlCarrito(juego)})
         })
-
     }
 
 function agregarAlCarrito(juego){
@@ -166,8 +160,8 @@ function cargarProductosCarrito(productosDelStorage) {
                         <button class= "btn btn-danger" id="botonEliminar"><i class="fas fa-trash-alt"></i></button>
                 </div>    
             </div>
-    `
-})
+        `
+    })
 //▼Declaro función para calcular total ||▼Se aplica Spread ...
 compraTotal(...productosDelStorage)
 }
@@ -215,3 +209,11 @@ eliminarModo.addEventListener("click", ()=>{
     localStorage.removeItem("darkMode")
 })
 //▲Fin declaraciones 
+
+//▼DETALLES APLICADOS▼
+//►En línea 74 Desestructurar Array 
+//►En línea 83 Se aplica Operador Nullish
+//►En línea 87 Se aplica Operador OR
+//►En línea 90 a 100 Desestructurar un objeto "juego1" ||►Se aplica Alias a "juego1A" ||►Se aplica Operador AND - OR
+//►En línea 165 Se aplica Spread ...
+//►En línea 176 Se aplica Operador Ternario ? : 
